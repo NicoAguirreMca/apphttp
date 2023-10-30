@@ -19,9 +19,9 @@ export class ViajesService {
   findOne(id: number) {
     return `This action returns a #${id} viaje`;
   }
-  public async listApi(){
+  /*public async listApi(){
         return this.httpService.apiFindAll()
-  }
+  }*/
 
   public async accessvuelo()
   {

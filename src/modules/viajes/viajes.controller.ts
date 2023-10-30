@@ -13,10 +13,10 @@ export class ViajesController {
   }
 
   
-  @Get('/list/api')
+  /*@Get('/list/api')
   public async listApi(){
         return this.viajesService.listApi()
-  }
+  }*/
 
   @Get('token')
   public async generateToken()
