@@ -11,21 +11,14 @@ export class ViajesController {
   create(@Body() createViajeDto: CreateViajeDto) {
     return this.viajesService.create(createViajeDto);
   }
-
-  
-  /*@Get('/list/api')
-  public async listApi(){
-        return this.viajesService.listApi()
-  }*/
-
-  @Get('token')
-  public async generateToken()
+ 
+  @Get('vuelos')
+  public async vuelos()
   {
         return this.viajesService.accessvuelo()
   }
 
-
-  @Get()
+  /*@Get()
   findAll() {
     return this.viajesService.findAll();
   }
@@ -43,5 +36,5 @@ export class ViajesController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.viajesService.remove(+id);
-  }
+  }*/
 }
