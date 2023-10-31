@@ -99,7 +99,49 @@ export class HttpCustomService {
             //console.log(error);
           }
        
-    }
+  }
+  public async buscaExcursion()
+    {
+
+        const token = await this.apiGetToken()
+        console.log(token);
+        const headersRequest = {
+          Authorization: `Bearer ${token}`
+        };
+        
+        try {
+            
+            const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",{headers: headersRequest })
+            //console.log(checkResultObservable);
+            const checkResult = await (await lastValueFrom(checkResultObservable)).data;
+            console.log(checkResult);
+            return checkResult.data;
+          } catch (error) {
+            //console.log(error);
+          }
+       
+  }
+  public async buscaVehiculo()
+    {
+
+        const token = await this.apiGetToken()
+        console.log(token);
+        const headersRequest = {
+          Authorization: `Bearer ${token}`
+        };
+        
+        try {
+            
+            const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",{headers: headersRequest })
+            //console.log(checkResultObservable);
+            const checkResult = await (await lastValueFrom(checkResultObservable)).data;
+            console.log(checkResult);
+            return checkResult.data;
+          } catch (error) {
+            //console.log(error);
+          }
+       
+  }
 
 
 }

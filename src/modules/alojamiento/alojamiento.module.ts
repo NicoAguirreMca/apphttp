@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AlojamientoService } from './alojamiento.service';
-import { HttpModule } from '@nestjs/axios';
-import { ConfigModule } from 'src/core/config/config.module';
-import { HttpCustomService } from 'src/providers/http/http.service';
-import { AlojamientoController } from './alojamiento.controller';
 
+import { AlojamientoController } from './alojamiento.controller';
+import { ProvidersModule } from 'src/providers/providers.module';
+import { HttpCustomService } from 'src/providers/http/http.service';
 
 @Module({
-  imports:[HttpModule,ConfigModule],
-  providers: [AlojamientoService],
-  exports: [HttpModule,HttpCustomService],
+  imports:[ProvidersModule],
+  providers: [AlojamientoService,HttpCustomService],
   controllers: [AlojamientoController]
 })
 export class AlojamientoModule {}

@@ -8,7 +8,7 @@ export class AlojamientoController {
 constructor(private readonly alojamientoService:AlojamientoService ) {}
 
 @Get('alojamiento')
-  public async vuelos()
+  public async alojamiento()
   {
         return this.alojamientoService.buscaAlojamiento();
   }
