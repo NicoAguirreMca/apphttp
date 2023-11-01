@@ -14,16 +14,7 @@ export class HttpCustomService {
     this.client_id=process.env.CLIENT_ID;
     this.client_secret=process.env.CLIENT_SECRET;
   }
-  /*public async apiFindAll() {
-    try {
-      const response = await firstValueFrom(
-        this.httpService.get('https://rickandmortyapi.com/api/character'),
-      );
-      return response.data;
-    } catch (error) {
-      throw ErrorManager.createSignatureError(error.message);
-    }
-  }*/
+  
   private async apiGetToken()
   {
   
@@ -89,9 +80,9 @@ export class HttpCustomService {
         };
         
         try {
-            
-            const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",{headers: headersRequest })
-            //console.log(checkResultObservable);
+            //DOCS DE API 
+            //https://developers.amadeus.com/self-service/category/hotels/api-doc/hotel-list/api-reference
+            const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-city?cityCode=PAR",{headers: headersRequest })
             const checkResult = await (await lastValueFrom(checkResultObservable)).data;
             console.log(checkResult);
             return checkResult.data;
@@ -110,7 +101,8 @@ export class HttpCustomService {
         };
         
         try {
-            
+           	//DOCS DE API
+		//https://developers.amadeus.com/self-service/category/destination-experiences/api-doc/tours-and-activities/api-reference
             const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",{headers: headersRequest })
             //console.log(checkResultObservable);
             const checkResult = await (await lastValueFrom(checkResultObservable)).data;
@@ -131,7 +123,8 @@ export class HttpCustomService {
         };
         
         try {
-            
+		//DOCS API
+		//https://developers.amadeus.com/self-service/category/cars-and-transfers/api-doc/transfer-search/api-reference
             const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",{headers: headersRequest })
             //console.log(checkResultObservable);
             const checkResult = await (await lastValueFrom(checkResultObservable)).data;
