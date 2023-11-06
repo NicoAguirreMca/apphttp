@@ -79,6 +79,33 @@ export class HttpCustomService {
       }  
   }
   
+  public async createFlightOrders()
+  {
+    const token = await this.apiGetToken()
+    console.log(token);
+    const headersRequest = {
+      Authorization: `Bearer ${token}`
+    };
+    /*cuerpo de request 
+      https://developers.amadeus.com/self-service/category/flights/api-doc/flight-create-orders/api-reference
+    */
+    const data = {
+
+    }
+    try {
+        
+        
+        const checkResultObservable = this.httpService.post(`https://test.api.amadeus.com/v1/booking/flight-orders`,data,{headers: headersRequest })
+        console.log(checkResultObservable);
+        const checkResult = await (await lastValueFrom(checkResultObservable)).data;
+        console.log(checkResult);
+        return checkResult.data;
+      } catch (error) {
+        //console.log(error);
+      }  
+
+  }
+
   public async searchFlightbyCity(city:string,cant_pasajero:string)
     {
 
