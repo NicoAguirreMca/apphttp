@@ -16,7 +16,14 @@ export class ViajesController {
   public async vuelos(@Query() filterQuery)
   {
     const { pais,dato}=filterQuery;
-    return this.viajesService.accessvuelo(pais,dato)
+    return this.viajesService.searchFlightbyCity(pais,dato)
+  }
+
+  @Get('ofertas')
+  public async ofertas(@Query() filterQuery)
+  {
+    const {origin,dest,departureD,returnD,adults,max}=filterQuery;
+    return this.viajesService.searchFlightbyOffers(origin,dest,departureD,returnD,adults,max)
   }
 
   /*@Get()

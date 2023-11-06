@@ -20,9 +20,13 @@ export class ViajesService {
     return `This action returns a #${id} viaje`;
   }
 
-  public async accessvuelo(pais:string,dato:string)
+  public async searchFlightbyCity(pais:string,dato:string)
   {
-        return this.httpService.searchVuelo(pais,dato)
+        return this.httpService.searchFlightbyCity(pais,dato)
+  }
+  public async searchFlightbyOffers(origin:string,dest:string,departureD:string,returnD:string,adults:string,max:string)
+  {
+        return this.httpService.searchFlightbyOffers(origin,dest,departureD,returnD,adults,max)
   }
 
   update(id: number, updateViajeDto: UpdateViajeDto) {

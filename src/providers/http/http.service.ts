@@ -49,14 +49,43 @@ export class HttpCustomService {
       //throw ErrorManager.createSignatureError(error.message);                                                                                                                                                                                                                                       
     }
   }
-  //Buscar---Destino
-  public async searchVuelo(pais:string,dato2:string)
+  
+
+  public async searchFlightbyOffers(origin:string,dest:string,departureD:string,returnD:string,adults:string,max:string){
+    const token = await this.apiGetToken()
+    console.log(token);
+    //https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=DEL&destinationLocationCode=LON&departureDate=2023-11-07&returnDate=2023-12-01&adults=2&max=2
+    console.log(`https://test.api.amadeus.com/v1/shopping/flight-offers/pricing`);
+    const headersRequest = {
+      Authorization: `Bearer ${token}`
+    };
+    
+    try {
+        
+        //origin code = CODIGO ORIGEN 
+        //destination code = CODIGO DESTINO
+        //departure = SALIDA VUELO
+        //return =  RETORNO VUELO
+        //adults = CANT ADULTOS
+        //max = CANT PERSONAS
+        
+        const checkResultObservable = this.httpService.get(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${origin}&destinationLocationCode=${dest}&departureDate=${departureD}&returnDate=${returnD}&adults=${adults}&max=${max}`,{headers: headersRequest })
+        console.log(checkResultObservable);
+        const checkResult = await (await lastValueFrom(checkResultObservable)).data;
+        console.log(checkResult);
+        return checkResult.data;
+      } catch (error) {
+        //console.log(error);
+      }  
+  }
+  
+  public async searchFlightbyCity(city:string,cant_pasajero:string)
     {
 
         const token = await this.apiGetToken()
         console.log(token);
-        console.log(`https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${pais}`);
-        console.log(dato2);
+        console.log(`https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${city}`);
+        console.log(cant_pasajero);
         const headersRequest = {
           Authorization: `Bearer ${token}`
         };
@@ -70,8 +99,11 @@ export class HttpCustomService {
 
             //flight airport & city search
             //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=MUC&countryCode=DE
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-            const checkResultObservable= this.httpService.get(`https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${pais}`,{headers: headersRequest })
+
+            //CODIGOS DE AEROPUERTOS DISPONIBLES == city:string
+            //https://www.nationsonline.org/oneworld/IATA_Codes/airport_code_list.htm#google_vignette
+            
+            const checkResultObservable= this.httpService.get(`https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${city}`,{headers: headersRequest })
             //console.log(checkResultObservable);
             const checkResult = await (await lastValueFrom(checkResultObservable)).data;
             console.log(checkResult);
