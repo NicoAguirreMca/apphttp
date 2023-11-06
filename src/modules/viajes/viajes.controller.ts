@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,Query } from '@nestjs/common';
 import { ViajesService } from './viajes.service';
 import { CreateViajeDto } from './dto/create-viaje.dto'
 import { UpdateViajeDto } from './dto/update-viaje.dto'
@@ -13,9 +13,10 @@ export class ViajesController {
   }
  
   @Get('vuelos')
-  public async vuelos()
+  public async vuelos(@Query() filterQuery)
   {
-        return this.viajesService.accessvuelo()
+    const { pais,dato}=filterQuery;
+    return this.viajesService.accessvuelo(pais,dato)
   }
 
   /*@Get()

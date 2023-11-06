@@ -46,21 +46,32 @@ export class HttpCustomService {
     }
     catch(error){
       //console.log(error)  
-      //throw ErrorManager.createSignatureError(error.message);
+      //throw ErrorManager.createSignatureError(error.message);                                                                                                                                                                                                                                       
     }
   }
-  public async searchVuelo()
+  //Buscar---Destino
+  public async searchVuelo(pais:string,dato2:string)
     {
 
         const token = await this.apiGetToken()
         console.log(token);
+        console.log(`https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${pais}`);
+        console.log(dato2);
         const headersRequest = {
           Authorization: `Bearer ${token}`
         };
         
         try {
+            //flight offers search GET
+            //https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=DEL&destinationLocationCode=LON&departureDate={{departureDate}}&returnDate={{returnDate}}&adults=2&max=5
             
-            const checkResultObservable= this.httpService.get("https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=200",{headers: headersRequest })
+            //flight offers PRICE
+            //https://test.api.amadeus.com/v1/shopping/flight-offers/pricing
+
+            //flight airport & city search
+            //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=MUC&countryCode=DE
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+            const checkResultObservable= this.httpService.get(`https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${pais}`,{headers: headersRequest })
             //console.log(checkResultObservable);
             const checkResult = await (await lastValueFrom(checkResultObservable)).data;
             console.log(checkResult);
@@ -70,6 +81,7 @@ export class HttpCustomService {
           }
        
   }
+   
   public async buscaAlojamiento()
     {
 
